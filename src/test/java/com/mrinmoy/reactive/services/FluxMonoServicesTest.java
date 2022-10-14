@@ -83,4 +83,60 @@ class FluxMonoServicesTest {
             .expectNextCount(17)
                 .verifyComplete();
     }
+
+    @Test
+    void fruitMonoFlatMapMany() {
+        var fruitsMap = fluxMonoServices.fruitMonoFlatMapMany();
+        StepVerifier.create(fruitsMap)
+                .expectNextCount(5)
+                .verifyComplete();
+    }
+
+    @Test
+    void fruitsFluxTransform() {
+        var fruitsFluxFilter = fluxMonoServices.fruitsFluxTransform(5);
+        StepVerifier.create(fruitsFluxFilter)
+                .expectNext("Orange", "Banana")
+                .verifyComplete();
+    }
+
+    @Test
+    void fruitsFluxTransformDefaultIfEmpty() {
+        var fruitsFluxFilter = fluxMonoServices.fruitsFluxTransformDefaultIfEmpty(10);
+        StepVerifier.create(fruitsFluxFilter)
+                .expectNext("Default")
+                .verifyComplete();
+    }
+
+    @Test
+    void fruitsFluxTransformSwitchIfEmpty() {
+        var fruitsFluxFilter = fluxMonoServices.fruitsFluxTransformSwitchIfEmpty(10);
+        StepVerifier.create(fruitsFluxFilter)
+                .expectNext("Milk", "Butter")
+                .verifyComplete();
+    }
+
+    @Test
+    void fruitsFluxConcat() {
+        var fruitsFlux = fluxMonoServices.fruitsFluxConcat();
+        StepVerifier.create(fruitsFlux)
+                .expectNext("Mango", "Orange", "Lemon", "Latuce")
+                .verifyComplete();
+    }
+
+    @Test
+    void fruitsFluxConcatWith() {
+        var fruitsFlux = fluxMonoServices.fruitsFluxConcatWith();
+        StepVerifier.create(fruitsFlux)
+                .expectNext("Mango", "Orange", "Lemon", "Latuce")
+                .verifyComplete();
+    }
+
+    @Test
+    void fruitsMonoConcatWith() {
+        var fruitsFlux = fluxMonoServices.fruitsMonoConcatWith();
+        StepVerifier.create(fruitsFlux)
+                .expectNext("Mango", "Lemon")
+                .verifyComplete();
+    }
 }
