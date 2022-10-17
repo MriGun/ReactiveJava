@@ -253,6 +253,7 @@ public class FluxMonoServices {
                     }
                     return s.toUpperCase();
                 })
+                .checkpoint("Error checkpoint")
                 .onErrorMap(throwable -> {
                     System.out.println("throwable = " + throwable);
                     return new IllegalStateException("From onError Map");

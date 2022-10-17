@@ -1,6 +1,7 @@
 package com.mrinmoy.reactive.services;
 
 import org.junit.jupiter.api.Test;
+import reactor.core.publisher.Hooks;
 import reactor.test.StepVerifier;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -226,6 +227,7 @@ class FluxMonoServicesTest {
 
     @Test
     void fruitsFluxOnErrorMap() {
+        //Hooks.onOperatorDebug();
         var fruitsFlux = fluxMonoServices.fruitsFluxOnErrorMap().log();
         StepVerifier.create(fruitsFlux)
                 .expectNext("APPLE")
